@@ -17,7 +17,7 @@ function App() {
    <Routes>
     <Route path="/" element={<Welcome />}></Route>
     <Route path="/:home" element={<Home />}></Route>
-    <Route pathe="/:name" element={<SingleDog />}></Route>
+    <Route path="/:name" element={<SingleDog />}></Route>
    </Routes>
    </>
   )
