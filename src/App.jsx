@@ -13,13 +13,13 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-   <>
-   <Routes>
-    <Route path="/" element={<Welcome />}></Route>
-    <Route path="/:home" element={<Home />}></Route>
-    <Route path="/:name" element={<SingleDog />}></Route>
-   </Routes>
-   </>
+    <>
+      <Routes>
+        <Route path="/" element={<Welcome />}></Route>
+        <Route path="/Home" element={<Home />}></Route>
+        <Route path="/:index" element={<SingleDog />}></Route>
+      </Routes>
+    </>
   )
 }
 

@@ -15,7 +15,7 @@ export default function Home() {
                 });
                 const data = await res.json();
                 setDogs(data.record);
-                console.log(data);
+                // console.log(data);
 
             } catch (error) {
                 console.error(error);
@@ -39,7 +39,7 @@ export default function Home() {
                             {dogs.length} dogs registered. This appication is powered by {""}
                             <a href="https://jsonbin.io" className="text-indigo-600 underline active:text-orange-400">jsonbin.io</a>
                         </p>
-                        <form className="max-w-xl mx-auto" autoComplete="off">
+                        {/* <form className="max-w-xl mx-auto" autoComplete="off">
                             <input
                                 type="text"
                                 name="search"
@@ -47,15 +47,17 @@ export default function Home() {
                                 placeholder="Search for a dog / breed"
                                 className=" py-2 px-4 rounded shadow w-full"
                             />
-                        </form>
+                        </form> */}
                     </div>
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 my-10 lg-20">
-                        {dogs.map((dog) => (
+                        {dogs.map((dog, index) => (
+                            
                             <Link 
-                            to={`/${dog.name}`}
+                            to={`/${index}`}
                             key={dog.chipNumber}
+                            className="bg-slate-700 p-4 rounded hover:bg-slate-600 transition-all duration-200"
                             >
-                            <article className="bg-slate-700 p-4 rounded" >
+                            <article  >
                                 <img
                                     src={dog.img}
                                     alt={dog.name}
