@@ -66,7 +66,9 @@ export default function Home() {
                                 key={dog.chipNumber}
                                 className="bg-slate-700 p-4 rounded hover:bg-slate-600 transition-all duration-200"
                             >
-                                <article  >
+                                <article  
+                                key={dog.chipNumber}
+                                className="bg-slate-700 p-4 rounded hover:bg-slate-600 transition-all duration-200">
                                     <img
                                         src={dog.img}
                                         alt={dog.name}
