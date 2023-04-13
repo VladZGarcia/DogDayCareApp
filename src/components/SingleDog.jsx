@@ -4,43 +4,47 @@ import { Link, useParams } from 'react-router-dom'
 export default function SingleDog() {
 
   const url = "https://api.jsonbin.io/v3/b/64254cc2ace6f33a22007d35?meta=false";
-  const [dog, setDog] = useState([])
+  // const [dog, setDog] = useState([]);
 
-  const { index } = useParams()
+  const { index } = useParams();
 
-  useEffect(() => {
-    console.log(index)
-    const fetchSingleDogData = async () => {
-      try {
-        const res = await fetch(url, {
-          headers: {
-            "X-Master-Key": "$2b$10$ijNUzOvWqtFAJ3EUlMybSeUrqUYdr.2GNXAEAEsf5/cTY1MtsBVHS"
+  let dogsLocal = JSON.parse(localStorage.getItem("dogs"));
+  console.log(dogsLocal)
 
-          }
-        });
-        const data = await res.json();
-        // const singleDog = data[index]
-        setDog(data[index]);
+  //     if (dogsLocal.length == 0) {
+  //   useEffect(() => {
+  //     console.log(index)
+  //     const fetchSingleDogData = async () => {
+  //       try {
+  //         const res = await fetch(url, {
+  //           headers: {
+  //             "X-Master-Key": "$2b$10$ijNUzOvWqtFAJ3EUlMybSeUrqUYdr.2GNXAEAEsf5/cTY1MtsBVHS"
 
-        console.log(data[index])
+  //           }
+  //         });
+  //         const data = await res.json();
+  //         // const singleDog = data[index]
+  //         setDog(data[index]);
 
+  //         console.log(data[index])
+  //         localStorage.setItem('dogs', JSON.stringify(dogs));
 
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     }
 
-    fetchSingleDogData();
+  //     fetchSingleDogData();
 
-  }, [index])
-  console.log(dog.name)
+  //   }, [index])
+  //   dogsLocal = JSON.parse(localStorage.getItem("dogs"));
+  //   console.log(dogsLocal)
+  // }
+  let dog = (dogsLocal[index]);
+  console.log(dog)
   return (
-    <>
-      {!dog ? (
-        <h1 className="flex items-center justify-center  text-center px-5 text-3xl h-screen font-bold uppercase">Loading...</h1>
-      ) : (<>
+       <>
         <section className="max-w-5xl mx-auto flex items-center justify-center h-screen">
-
           <div
             key={dog.chipNumber}
             className="grid grid-cols-1 gap-8 p-8 md:grid-cols-2 md:place-items-center">
@@ -53,9 +57,9 @@ export default function SingleDog() {
                 <li><span className="font-bold text-slate-200">Age:</span>  {dog.age}</li>
                 <li><span className="font-bold text-slate-200">Breed:</span> {dog.breed}</li>
                 <li><span className="font-bold text-slate-200">ChipNumber:</span> {dog.chipNumber}</li>
-                {/* <li><span className="font-bold text-slate-200">OwnerName:</span> {dog.owner.name} </li>
+                <li><span className="font-bold text-slate-200">OwnerName:</span> {dog.owner.name} </li>
                 <li><span className="font-bold text-slate-200">OwnerLastName:</span> {dog.owner.lastName} </li>
-                <li><span className="font-bold text-slate-200">PhoneNumber:</span> {dog.owner.phoneNumber} </li> */}
+                <li><span className="font-bold text-slate-200">PhoneNumber:</span> {dog.owner.phoneNumber} </li>
                 <li><span className="font-bold text-slate-200">Sex:</span> {dog.sex}</li>
                 <li> {dog.present ? <p className="text-white text-lg">Present</p> : <p>not present</p>}</li>
               </ul>
@@ -68,8 +72,6 @@ export default function SingleDog() {
             </article>
           </div>
         </section>
-      </>)}
-
-    </>
+      </>
   )
 }
