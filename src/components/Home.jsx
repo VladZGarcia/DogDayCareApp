@@ -5,6 +5,11 @@ export default function Home() {
     const [dogs, setDogs] = useState([]);
     const url = "https://api.jsonbin.io/v3/b/64254cc2ace6f33a22007d35";
 
+    let dogsLocal = JSON.parse(localStorage.getItem("dogs"));
+    console.log(dogsLocal)
+
+    if (dogsLocal.length == 0) {
+
     useEffect(() => {
         const fetchDogData = async () => {
             try {
@@ -15,8 +20,8 @@ export default function Home() {
                 });
                 const data = await res.json();
                 setDogs(data.record);
-                // console.log(data);
-
+                
+                    localStorage.setItem('dogs', JSON.stringify(dogs));
             } catch (error) {
                 console.error(error);
             }
@@ -24,6 +29,10 @@ export default function Home() {
 
         fetchDogData();
     }, [])
+
+    dogsLocal = JSON.parse(localStorage.getItem("dogs"));
+    console.log(dogsLocal)
+}
 
     return (
         <>
@@ -36,7 +45,7 @@ export default function Home() {
                             The Dog Daycare App
                         </h1>
                         <p className="my-8">
-                            {dogs.length} dogs registered. This appication is powered by {""}
+                            {dogsLocal.length} dogs registered. This appication is powered by {""}
                             <a href="https://jsonbin.io" className="text-indigo-600 underline active:text-orange-400">jsonbin.io</a>
                         </p>
                         {/* <form className="max-w-xl mx-auto" autoComplete="off">
@@ -50,24 +59,24 @@ export default function Home() {
                         </form> */}
                     </div>
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3 my-10 lg-20">
-                        {dogs.map((dog, index) => (
-                            
-                            <Link 
-                            to={`/${index}`}
-                            key={dog.chipNumber}
-                            className="bg-slate-700 p-4 rounded hover:bg-slate-600 transition-all duration-200"
+                        {dogsLocal.map((dog, index) => (
+
+                            <Link
+                                to={`/${index}`}
+                                key={dog.chipNumber}
+                                className="bg-slate-700 p-4 rounded hover:bg-slate-600 transition-all duration-200"
                             >
-                            <article  >
-                                <img
-                                    src={dog.img}
-                                    alt={dog.name}
-                                    loading="lazy"
-                                    className="rounded md:h-72 w-full object-cover" />
-                                <h3 className="text-white text-lg font-bold mt-4">
-                                    {dog.name}
-                                </h3>
-                                <p className="text-slate-400">Breed: {dog.breed}</p>
-                            </article>
+                                <article  >
+                                    <img
+                                        src={dog.img}
+                                        alt={dog.name}
+                                        loading="lazy"
+                                        className="rounded md:h-72 w-full object-cover" />
+                                    <h3 className="text-white text-lg font-bold mt-4">
+                                        {dog.name}
+                                    </h3>
+                                    <p className="text-slate-400">Breed: {dog.breed}</p>
+                                </article>
                             </Link>
                         ))}
                     </div>
